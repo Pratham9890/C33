@@ -81,9 +81,9 @@ function draw(){
 }
 
 function mouseDragged(){
-    //if (gameState!=="launched"){
+    if (gameState!=="launched"){
         Matter.Body.setPosition(bird.body, {x: mouseX , y: mouseY});
-    //}
+    }
 }
 
 
@@ -94,7 +94,15 @@ function mouseReleased(){
 
 function keyPressed(){
     if(keyCode === 32){
+
+       bird.trajectory = [];
+       Matter.Body.setPosition(bird.body, {x: 200 , y: 50});
+       bird.body.VelocityY=0
+       bird.body.VelocityX=0
+       Matter.Body.setAngle(bird.body, PI/200);
+       Matter.Body.setAngularVelocity(bird.body, 0)
        slingshot.attach(bird.body);
+       gameState="ONSLING"
     }
 }
 
